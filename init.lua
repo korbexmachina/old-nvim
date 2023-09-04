@@ -23,10 +23,25 @@ require('lazy').setup({
 },
 {})
 
+-- [[ Options ]]
+vim.o.hlsearch = false
+vim.o.relativenumber = true
+vim.o.number = true
+vim.o.breakindent = true
+vim.o.undofile = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
+vim.o.updatetime = 250
+vim.o.timeout = true
+vim.o.timeoutlen = 300
+vim.o.completeopt = 'menuone,noselect'
+vim.o.termguicolors = true
+
 -- [[ KEYBINDS ]]
 -- Oil
 vim.keymap.set("n", "<C-o>", vim.cmd.Oil, { desc = 'Oil' })
 
+-- Telescope
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>sr', builtin.oldfiles, { desc = '[S]earch [R]ecent files' })
 vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
