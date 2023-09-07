@@ -22,15 +22,15 @@ return {
 
   dashboard.section.footer.val = fortune()
 
-  vim.api.nvim_create_autocmd("UIEnter", {
-  callback = function()
-  local stats = require("lazy").stats()
-  local time = math.floor(stats.startuptime * 100 + 0.5) / 100
-  dashboard.section.footer.val = { " ", " ", " ", "Neovim loaded " .. stats.count .. " plugins  in " .. time .. "ms" }
-  dashboard.section.footer.opts.hl = "DashboardFooter"
-  end,
-  })
-  -- dashboard.config.opts.noautocmd = true
+  -- vim.api.nvim_create_autocmd("UIEnter", {
+  -- callback = function()
+  -- local stats = require("lazy").stats()
+  -- local time = math.floor(stats.startuptime * 100 + 0.5) / 100
+  -- dashboard.section.footer.val = { " ", " ", " ", "Neovim loaded " .. stats.count .. " plugins  in " .. time .. "ms" }
+  -- dashboard.section.footer.opts.hl = "DashboardFooter"
+  -- end,
+  -- })
+  dashboard.config.opts.noautocmd = true
   dashboard.config.layout[1].val = vim.fn.max { 2, vim.fn.floor(vim.fn.winheight(0) * 0.2) }
   dashboard.config.layout[3].val = 5
   vim.cmd[[autocmd User AlphaReady echo 'ready']]
