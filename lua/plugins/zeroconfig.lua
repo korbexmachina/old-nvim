@@ -44,4 +44,27 @@ return {
 	{
 		'mbbill/undotree'
 	},
+
+	-- LaTeX
+	{
+		'jbyuki/nabla.nvim',
+		keys = {
+			{ '<leader>nv', ':lua require"nabla".toggle_virt()<cr>', 'toggle equations' },
+			{ '<leader>p', ':lua require"nabla".popup()<cr>', 'hover equation' },
+		}
+	},
+
+	-- TODO Comments
+	{
+		"folke/todo-comments.nvim",
+		lazy = false,
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {}
+	},
+
+	-- GitHub Copilot
+	{
+		"github/copilot.vim",
+		lazy = false
+	}
 }

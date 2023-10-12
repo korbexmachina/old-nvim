@@ -63,3 +63,7 @@ vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
 
 -- Fugitive
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
+
+-- Nabla
+-- vim.keymap.set('n', '<leader>p', require("nabla").popup())
+-- nnoremap <leader>p :lua require("nabla").popup()<CR>
