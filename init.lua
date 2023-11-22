@@ -36,6 +36,13 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
+-- Treesitter folding 
+-- vim.wo.foldmethod = 'expr'
+-- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
+vim.cmd([[
+set signcolumn=yes
+autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+]])
 
 -- [[ KEYBINDS ]]
 -- Oil
@@ -59,10 +66,13 @@ vim.keymap.set('n', '<leader>/', function()
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 -- Undotree
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree'})
 
 -- Fugitive
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
+
+-- Toggleterm
+vim.keymap.set('n', '<leader>t', vim.cmd.Toggleterm, { desc = '[T]oggleterm'})
 
 -- Nabla
 -- vim.keymap.set('n', '<leader>p', require("nabla").popup())

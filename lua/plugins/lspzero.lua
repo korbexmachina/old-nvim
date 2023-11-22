@@ -3,13 +3,33 @@ return {
   branch = 'v2.x',
   dependencies = {
     -- LSP Support
-    {'neovim/nvim-lspconfig'},             -- Required
-    {'williamboman/mason.nvim'},           -- Optional
+    {
+      'neovim/nvim-lspconfig',
+      -- Rust setup
+      config = function()
+        -- Require lspconfig file
+        require 'lspconfig'
+      end
+    },
+    -- Rust support
+    {'simrat39/rust-tools.nvim'},
+    {
+      'williamboman/mason.nvim',
+      config = function()
+        require("mason").setup({
+          ui = {
+            icons = {
+              package_installed = "",
+              package_pending = "",
+              package_uninstalled = "",
+            },
+          }
+        })
+      end
+    },
     {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
     -- Autocompletion
-    {'hrsh7th/nvim-cmp'},     -- Required
-    {'hrsh7th/cmp-nvim-lsp'}, -- Required
     {'L3MON4D3/LuaSnip'},     -- Required
   },
 
@@ -20,36 +40,64 @@ return {
 
     lsp.ensure_installed({
       'gopls',
+      'rust_analyzer',
     })
 
     -- Fix Undefined global 'vim'
     lsp.nvim_workspace()
 
-
-    local cmp = require('cmp')
-    local cmp_select = {behavior = cmp.SelectBehavior.Select}
-    local cmp_mappings = lsp.defaults.cmp_mappings({
-      ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-      ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-      ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-      ["<C-Space>"] = cmp.mapping.complete(),
-    })
-
-    cmp_mappings['<Tab>'] = nil
-    cmp_mappings['<S-Tab>'] = nil
-
-    lsp.setup_nvim_cmp({
-      mapping = cmp_mappings
-    })
-
-    lsp.set_preferences({
-      suggest_lsp_servers = false,
-      sign_icons = {
-        error = 'E',
-        warn = 'W',
-        hint = 'H',
-        info = 'I'
-      }
+    -- Completion Plugin Setup
+    local cmp = require'cmp'
+    cmp.setup({
+      -- Enable LSP snippets
+      snippet = {
+        expand = function(args)
+          vim.fn["vsnip#anonymous"](args.body)
+        end,
+      },
+      mapping = {
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        -- Remove tab bindings
+        ['<S-Tab>'] = nil,
+        ['<Tab>'] = nil,
+        -- Scroll documentation
+        ['<C-S-f>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<C-y>'] = cmp.mapping.confirm({
+          behavior = cmp.ConfirmBehavior.Insert,
+          select = true,
+        })
+      },
+      -- Installed sources:
+      sources = {
+        { name = 'path' },                              -- file paths
+        { name = 'nvim_lsp', keyword_length = 3 },      -- from language server
+        { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
+        { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
+        { name = 'buffer', keyword_length = 2 },        -- source current buffer
+        { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip 
+        { name = 'calc'},                               -- source for math calculation
+      },
+      window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+      },
+      formatting = {
+        fields = {'menu', 'abbr', 'kind'},
+        format = function(entry, item)
+          local menu_icon ={
+            nvim_lsp = 'λ',
+            vsnip = '⋗',
+            buffer = 'Ω',
+            path = '🖫',
+          }
+          item.menu = menu_icon[entry.source.name]
+          return item
+        end,
+      },
     })
 
     lsp.on_attach(function(client, bufnr)
