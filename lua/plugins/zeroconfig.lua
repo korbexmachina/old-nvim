@@ -99,7 +99,8 @@ return {
 		'akinsho/toggleterm.nvim',
 		version = "*",
 		config = true,
-		setup = function() require('toggleterm').setup{} end
+		setup = function() require('toggleterm').setup{} end,
+		vim.keymap.set('n', '<leader>t', ':Toggleterm direction=float<CR>')
 	},
 
 	-- Debugging
@@ -118,5 +119,12 @@ return {
 		config = function ()
 			vim.notify = require("notify")
 		end
+	},
+
+	-- gen.nvim
+	{
+		'David-Kunz/gen.nvim',
+		vim.keymap.set('v', '<leader>]', ':Gen<CR>'),
+		vim.keymap.set('n', '<leader>]', ':Gen<CR>')
 	}
 }

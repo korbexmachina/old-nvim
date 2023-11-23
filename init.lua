@@ -72,7 +72,7 @@ vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree'})
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 
 -- Toggleterm
-vim.keymap.set('n', '<leader>t', vim.cmd.Toggleterm, { desc = '[T]oggleterm'})
+-- vim.keymap.set('n', '<leader>t', ':Toggleterm direction=float<CR>', { desc = '[T]oggleterm'})
 
 -- Nabla
 -- vim.keymap.set('n', '<leader>p', require("nabla").popup())
