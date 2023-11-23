@@ -100,5 +100,23 @@ return {
 		version = "*",
 		config = true,
 		setup = function() require('toggleterm').setup{} end
+	},
+
+	-- Debugging
+	{
+		'mfussenegger/nvim-dap',
+		{
+			'rcarriga/nvim-dap-ui',
+			requires = {'mfussenegger/nvim-dap'}
+		},
+		'theHamsta/nvim-dap-virtual-text'
+	},
+
+	-- Notifications
+	{
+		'rcarriga/nvim-notify',
+		config = function ()
+			vim.notify = require("notify")
+		end
 	}
 }
