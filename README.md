@@ -24,6 +24,9 @@ NVIM_APPNAME=korbexmachina/nvim/ nvim
 
 ## Plugins
 
+### ai
+
++ [David-Kunz/gen.nvim](https://dotfyle.com/plugins/David-Kunz/gen.nvim)
 ### colorscheme
 
 + [catppuccin/nvim](https://dotfyle.com/plugins/catppuccin/nvim)
@@ -35,6 +38,11 @@ NVIM_APPNAME=korbexmachina/nvim/ nvim
 
 + [simrat39/rust-tools.nvim](https://dotfyle.com/plugins/simrat39/rust-tools.nvim)
 + [hrsh7th/nvim-cmp](https://dotfyle.com/plugins/hrsh7th/nvim-cmp)
+### debugging
+
++ [theHamsta/nvim-dap-virtual-text](https://dotfyle.com/plugins/theHamsta/nvim-dap-virtual-text)
++ [rcarriga/nvim-dap-ui](https://dotfyle.com/plugins/rcarriga/nvim-dap-ui)
++ [mfussenegger/nvim-dap](https://dotfyle.com/plugins/mfussenegger/nvim-dap)
 ### editing-support
 
 + [windwp/nvim-autopairs](https://dotfyle.com/plugins/windwp/nvim-autopairs)
@@ -79,6 +87,9 @@ NVIM_APPNAME=korbexmachina/nvim/ nvim
 ### syntax
 
 + [nvim-treesitter/nvim-treesitter](https://dotfyle.com/plugins/nvim-treesitter/nvim-treesitter)
+### utility
+
++ [rcarriga/nvim-notify](https://dotfyle.com/plugins/rcarriga/nvim-notify)
 ## Language Servers
 
 + gopls
