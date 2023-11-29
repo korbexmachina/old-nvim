@@ -28,6 +28,19 @@ return {
 		config = function() require("nvim-autopairs").setup {} end
 	},
 
+	-- GitHub Copilot
+	{
+		"github/copilot.vim",
+		lazy = false,
+		config = function()
+			vim.keymap.set('i', '<C-J>', 'copilot#Accept("<CR>")', {
+				expr = true,
+				replace_keycodes = false
+			})
+			vim.g.copilot_no_tab_map = true
+		end
+	},
+
 	-- Keybinds
 	{
 		'folke/which-key.nvim',
@@ -62,16 +75,10 @@ return {
 		opts = {}
 	},
 
-	-- GitHub Copilot
-	{
-		"github/copilot.vim",
-		lazy = false
-	},
-
 	-- Rust
 	{
 		'rust-lang/rust.vim',
-		ft = { 'rust' },
+	ft = { 'rust' },
 		init = function()
 			vim.g.rustfmt_autosave = 1
 			vim.g.rustfmt_fail_silently = 1
