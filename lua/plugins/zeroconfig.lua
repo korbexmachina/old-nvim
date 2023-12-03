@@ -78,7 +78,7 @@ return {
 	-- Rust
 	{
 		'rust-lang/rust.vim',
-	ft = { 'rust' },
+		ft = { 'rust' },
 		init = function()
 			vim.g.rustfmt_autosave = 1
 			vim.g.rustfmt_fail_silently = 1
@@ -124,7 +124,9 @@ return {
 	{
 		'rcarriga/nvim-notify',
 		config = function ()
-			vim.notify = require("notify")
+			vim.notify = require("notify").setup{
+				background_colour = "#0e0e0e",
+			}
 		end
 	},
 
@@ -133,5 +135,48 @@ return {
 		'David-Kunz/gen.nvim',
 		vim.keymap.set('v', '<leader>]', ':Gen<CR>'),
 		vim.keymap.set('n', '<leader>]', ':Gen<CR>')
+	},
+
+	-- NUI
+	{
+		'MunifTanjim/nui.nvim',
+	},
+
+	-- lazy.nvim
+	{
+		"folke/noice.nvim",
+		event = "VeryLazy",
+		opts = {
+			-- add any options here
+		},
+		dependencies = {
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			"rcarriga/nvim-notify",
+		},
+
+		setup = function ()
+			require("noice").setup({
+				lsp = {
+					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+					override = {
+						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+						["vim.lsp.util.stylize_markdown"] = true,
+						["cmp.entry.get_documentation"] = true,
+					},
+				},
+				-- you can enable a preset for easier configuration
+				presets = {
+					bottom_search = true, -- use a classic bottom cmdline for search
+					command_palette = true, -- position the cmdline and popupmenu together
+					long_message_to_split = true, -- long messages will be sent to a split
+					inc_rename = false, -- enables an input dialog for inc-rename.nvim
+					lsp_doc_border = false, -- add a border to hover docs and signature help
+				},
+			})
+		end,
 	}
 }
