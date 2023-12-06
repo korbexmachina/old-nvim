@@ -1,5 +1,6 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  lazy = true,
   build = ":TSUpdate",
   config = function ()
     local configs = require("nvim-treesitter.configs")
@@ -15,7 +16,7 @@ return {
         extended_mode = true,
         max_file_lines = nil,
       },
-      disable = { "latex", "tex" },
+      disable = { "latex", "tex", "markdown" },
     })
   end,
 }

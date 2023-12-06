@@ -44,6 +44,14 @@ set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
 
+-- [[ Plugins ]]
+vim.o.conceallevel= 2
+vim.g.vim_markdown_override_foldtext = 0
+vim.g.vim_markdown_toc_autofit = 1
+vim.g.vim_markdown_math = 1
+vim.g.vim_markdown_frontmatter = 1
+vim.g.vim_markdown_strikethrough = 1
+
 -- [[ KEYBINDS ]]
 -- Oil
 vim.keymap.set("n", "<C-o>", vim.cmd.Oil, { desc = 'Oil' })
@@ -70,6 +78,11 @@ vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree'})
 
 -- Fugitive
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
+
+-- Obsidian
+vim.keymap.set('n', '<leader>oo', vim.cmd.ObsidianOpen, { desc = '[O]pen [O]bsidian' })
+vim.keymap.set('n', '<leader>of', vim.cmd.ObsidianQuickSwitch, { desc = '[O]bsidian [F]ind'})
+vim.keymap.set('n', '<leader>od', vim.cmd.ObsidianFollowLink, { desc = '[O]bsidian [D]eep link'})
 
 -- LuaSnip
 -- local ls = require('luasnip')

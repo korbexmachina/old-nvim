@@ -60,11 +60,11 @@ return {
 
 	-- LaTeX
 	-- {
-		-- 'jbyuki/nabla.nvim',
-		-- keys = {
-		-- 	{ '<leader>nv', ':lua require"nabla".toggle_virt()<cr>', { desc = 'toggle equations' } },
-		-- 	{ '<leader>p', ':lua require"nabla".popup()<cr>', { desc = 'hover equation' } },
-		-- }
+	-- 'jbyuki/nabla.nvim',
+	-- keys = {
+	-- 	{ '<leader>nv', ':lua require"nabla".toggle_virt()<cr>', { desc = 'toggle equations' } },
+	-- 	{ '<leader>p', ':lua require"nabla".popup()<cr>', { desc = 'hover equation' } },
+	-- }
 	-- },
 
 	-- TODO Comments
@@ -78,7 +78,7 @@ return {
 	-- Rust
 	{
 		'rust-lang/rust.vim',
-	ft = { 'rust' },
+		ft = { 'rust' },
 		init = function()
 			vim.g.rustfmt_autosave = 1
 			vim.g.rustfmt_fail_silently = 1
@@ -141,4 +141,42 @@ return {
 	{
 		'MunifTanjim/nui.nvim',
 	},
+
+	-- Tabular
+	{
+		'godlygeek/tabular',
+		lazy = true,
+		ft = { 'md', 'markdown' }
+	},
+
+	-- Markdown
+	{
+		'preservim/vim-markdown',
+		lazy = true,
+		ft = { 'md', 'markdown' },
+	},
+
+	-- Obsidian
+	{
+		"epwalsh/obsidian.nvim",
+		version = "*",  -- recommended, use latest release instead of latest commit
+		lazy = true,
+		ft = "markdown",
+		dependencies = {
+			-- Required.
+			"nvim-lua/plenary.nvim",
+			-- Optional
+			'hrsh7th/nvim-cmp',
+			'nvim-telescope/telescope.nvim',
+		},
+		opts = {
+			workspaces = {
+				{
+					name = "notes",
+					path = "~/notes",
+				},
+			},
+
+		},
+	}
 }
