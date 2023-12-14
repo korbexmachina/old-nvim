@@ -43,18 +43,12 @@ vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
-
--- [[ Plugins ]]
 vim.o.conceallevel= 2
 vim.g.vim_markdown_override_foldtext = 0
 vim.g.vim_markdown_toc_autofit = 1
 vim.g.vim_markdown_math = 1
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_strikethrough = 1
-
--- [[ KEYBINDS ]]
--- Oil
-vim.keymap.set("n", "<C-o>", vim.cmd.Oil, { desc = 'Oil' })
 
 -- Telescope
 local builtin = require('telescope.builtin')
@@ -72,33 +66,3 @@ vim.keymap.set('n', '<leader>/', function()
 		previewer = false,
 	})
 end, { desc = '[/] Fuzzily search in current buffer' })
-
--- Undotree
-vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree'})
-
--- Fugitive
-vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
-
--- Obsidian
-vim.keymap.set('n', '<leader>oo', vim.cmd.ObsidianOpen, { desc = '[O]pen [O]bsidian' })
-vim.keymap.set('n', '<leader>of', vim.cmd.ObsidianQuickSwitch, { desc = '[O]bsidian [F]ind'})
-vim.keymap.set('n', '<leader>od', vim.cmd.ObsidianFollowLink, { desc = '[O]bsidian [D]eep link'})
-
--- LuaSnip
--- local ls = require('luasnip')
--- vim.keymap.set({"i"}, "<tab>", function() ls.expand() end, {silent = true})
--- vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})
--- vim.keymap.set({"i", "s"}, "<C-H>", function() ls.jump(-1) end, {silent = true})
-
--- vim.keymap.set({"i", "s"}, "<C-E>", function()
--- 	if ls.choice_active() then
--- 		ls.change_choice(1)
--- 	end
--- end, {silent = true})
-
--- Toggleterm
--- vim.keymap.set('n', '<leader>t', ':Toggleterm direction=float<CR>', { desc = '[T]oggleterm'})
-
--- Nabla
--- vim.keymap.set('n', '<leader>p', require("nabla").popup())
--- nnoremap <leader>p :lua require("nabla").popup()<CR>

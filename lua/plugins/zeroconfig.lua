@@ -13,10 +13,17 @@ return {
 		opts = {},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		setup = function() require("oil").setup() {} end,
+
+		vim.keymap.set("n", "<C-o>", vim.cmd.Oil, { desc = 'Oil' })
 	},
 
 	-- Git
-	'tpope/vim-fugitive',
+	{
+		'tpope/vim-fugitive',
+
+		vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
+	},
+
 	'tpope/vim-rhubarb',
 
 	-- Tabstop & shiftwidth
@@ -55,7 +62,9 @@ return {
 
 	-- Undotree
 	{
-		'mbbill/undotree'
+		'mbbill/undotree',
+
+		vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree'})
 	},
 
 	-- LaTeX
@@ -107,7 +116,8 @@ return {
 		version = "*",
 		config = true,
 		setup = function() require('toggleterm').setup{} end,
-		vim.keymap.set('n', '<leader>t', ':Toggleterm direction=float<CR>')
+
+		vim.keymap.set('n', '<leader>tf', ':ToggleTerm direction=float<CR>')
 	},
 
 	-- Debugging
@@ -133,6 +143,7 @@ return {
 	-- gen.nvim
 	{
 		'David-Kunz/gen.nvim',
+
 		vim.keymap.set('v', '<leader>]', ':Gen<CR>'),
 		vim.keymap.set('n', '<leader>]', ':Gen<CR>')
 	},
@@ -178,5 +189,19 @@ return {
 			},
 
 		},
+
+		vim.keymap.set('n', '<leader>oo', vim.cmd.ObsidianOpen, { desc = '[O]pen [O]bsidian' }),
+		vim.keymap.set('n', '<leader>of', vim.cmd.ObsidianQuickSwitch, { desc = '[O]bsidian [F]ind'}),
+		vim.keymap.set('n', '<leader>od', vim.cmd.ObsidianFollowLink, { desc = '[O]bsidian [D]eep link'})
+	},
+
+	-- File manager integration
+	{
+		'is0n/fm-nvim',
+
+		-- File manager keybinds
+		vim.keymap.set('n', '<leader>x', ':Xplr<CR>'),
+		vim.keymap.set('n', '<leader>w', ':TaskWarriorTUI<CR>'),
+		vim.keymap.set('n', '<leader>lg', ':Lazygit<CR>')
 	}
 }
