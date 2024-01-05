@@ -49,6 +49,7 @@ vim.g.vim_markdown_toc_autofit = 1
 vim.g.vim_markdown_math = 1
 vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_strikethrough = 1
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
 -- Telescope
 local builtin = require('telescope.builtin')

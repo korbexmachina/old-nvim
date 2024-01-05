@@ -12,7 +12,7 @@ return {
       end
     },
     -- Rust support
-    {'simrat39/rust-tools.nvim'},
+    { 'simrat39/rust-tools.nvim' },
     {
       'williamboman/mason.nvim',
       config = function()
@@ -27,14 +27,14 @@ return {
         })
       end
     },
-    {'williamboman/mason-lspconfig.nvim'}, -- Optional
+    { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
     -- Autocompletion
     {
       'L3MON4D3/LuaSnip',
       config = function()
-        require("luasnip.loaders.from_lua").lazy_load({paths = "~/.config/nvim/lua/luasnip/"}) -- Source snippets
-        require("luasnip").config.set_config({ -- Setting LuaSnip config
+        require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/lua/luasnip/" }) -- Source snippets
+        require("luasnip").config.set_config({                                                   -- Setting LuaSnip config
           -- Enable autotriggered snippets
           enable_autosnippets = true,
 
@@ -43,10 +43,10 @@ return {
         })
         -- require('luasnip').setup({ enable_autosnippets = true })
       end
-    },     -- Required
+    }, -- Required
   },
 
-  config = function ()
+  config = function()
     local lsp = require("lsp-zero")
 
     lsp.preset("recommended")
@@ -54,6 +54,8 @@ return {
     lsp.ensure_installed({
       'gopls',
       'rust_analyzer',
+      'clangd',
+      'lua_ls',
     })
 
     -- Fix Undefined global 'vim'
@@ -84,7 +86,7 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
+            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
             -- that way you will only jump inside the snippet region
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
@@ -125,22 +127,22 @@ return {
 
       -- Installed sources:
       sources = {
-        { name = 'path' },                              -- file paths
-        { name = 'nvim_lsp', keyword_length = 3 },      -- from language server
-        { name = 'nvim_lsp_signature_help'},            -- display function signatures with current parameter emphasized
-        { name = 'nvim_lua', keyword_length = 2},       -- complete neovim's Lua runtime API such vim.lsp.*
-        { name = 'buffer', keyword_length = 2 },        -- source current buffer
-        { name = 'vsnip', keyword_length = 2 },         -- nvim-cmp source for vim-vsnip 
-        { name = 'calc'},                               -- source for math calculation
+        { name = 'path' },                                       -- file paths
+        { name = 'nvim_lsp',               keyword_length = 3 }, -- from language server
+        { name = 'nvim_lsp_signature_help' },                    -- display function signatures with current parameter emphasized
+        { name = 'nvim_lua',               keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
+        { name = 'buffer',                 keyword_length = 2 }, -- source current buffer
+        { name = 'vsnip',                  keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
+        { name = 'calc' },                                       -- source for math calculation
       },
       window = {
         completion = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
       },
       formatting = {
-        fields = {'menu', 'abbr', 'kind'},
+        fields = { 'menu', 'abbr', 'kind' },
         format = function(entry, item)
-          local menu_icon ={
+          local menu_icon = {
             nvim_lsp = 'λ',
             vsnip = '⋗',
             buffer = 'Ω',
@@ -153,7 +155,7 @@ return {
     })
 
     lsp.on_attach(function(client, bufnr)
-      local opts = {buffer = bufnr, remap = false}
+      local opts = { buffer = bufnr, remap = false }
 
       vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
       vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)

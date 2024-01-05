@@ -17,6 +17,11 @@ return {
 		vim.keymap.set("n", "<C-o>", vim.cmd.Oil, { desc = 'Oil' })
 	},
 
+	-- LSP
+	{
+		'williamboman/mason-lspconfig.nvim'
+	}, -- Optional
+
 	-- Git
 	{
 		'tpope/vim-fugitive',
@@ -64,7 +69,7 @@ return {
 	{
 		'mbbill/undotree',
 
-		vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree'})
+		vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree' })
 	},
 
 	-- LaTeX
@@ -115,7 +120,7 @@ return {
 		'akinsho/toggleterm.nvim',
 		version = "*",
 		config = true,
-		setup = function() require('toggleterm').setup{} end,
+		setup = function() require('toggleterm').setup {} end,
 
 		vim.keymap.set('n', '<leader>tf', ':ToggleTerm direction=float<CR>')
 	},
@@ -125,7 +130,7 @@ return {
 		'mfussenegger/nvim-dap',
 		{
 			'rcarriga/nvim-dap-ui',
-			requires = {'mfussenegger/nvim-dap'}
+			requires = { 'mfussenegger/nvim-dap' }
 		},
 		'theHamsta/nvim-dap-virtual-text'
 	},
@@ -133,8 +138,8 @@ return {
 	-- Notifications
 	{
 		'rcarriga/nvim-notify',
-		config = function ()
-			vim.notify = require("notify").setup{
+		config = function()
+			vim.notify = require("notify").setup {
 				background_colour = "#0e0e0e",
 			}
 		end
@@ -170,7 +175,7 @@ return {
 	-- Obsidian
 	{
 		"epwalsh/obsidian.nvim",
-		version = "*",  -- recommended, use latest release instead of latest commit
+		version = "*", -- recommended, use latest release instead of latest commit
 		lazy = true,
 		ft = "markdown",
 		dependencies = {
@@ -191,8 +196,8 @@ return {
 		},
 
 		vim.keymap.set('n', '<leader>oo', vim.cmd.ObsidianOpen, { desc = '[O]pen [O]bsidian' }),
-		vim.keymap.set('n', '<leader>of', vim.cmd.ObsidianQuickSwitch, { desc = '[O]bsidian [F]ind'}),
-		vim.keymap.set('n', '<leader>od', vim.cmd.ObsidianFollowLink, { desc = '[O]bsidian [D]eep link'})
+		vim.keymap.set('n', '<leader>of', vim.cmd.ObsidianQuickSwitch, { desc = '[O]bsidian [F]ind' }),
+		vim.keymap.set('n', '<leader>od', vim.cmd.ObsidianFollowLink, { desc = '[O]bsidian [D]eep link' })
 	},
 
 	-- File manager integration
