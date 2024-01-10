@@ -24,6 +24,7 @@ require('lazy').setup({
 	{})
 
 -- [[ Options ]]
+vim.opt.guifont = 'FiraCode Nerd Font Mono:h12'
 vim.o.hlsearch = false
 vim.o.relativenumber = true
 vim.o.number = true
