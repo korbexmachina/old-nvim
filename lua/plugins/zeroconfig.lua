@@ -135,7 +135,9 @@ return {
 	-- gen.nvim
 	{
 		'David-Kunz/gen.nvim',
-
+		opts = {
+			model = "mixtral:instruct", -- The default model to use.
+		},
 		vim.keymap.set('v', '<leader>]', ':Gen<CR>'),
 		vim.keymap.set('n', '<leader>]', ':Gen<CR>')
 	},

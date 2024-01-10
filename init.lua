@@ -19,9 +19,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-	{ import = 'plugins' },
-},
-{})
+		{ import = 'plugins' },
+	},
+	{})
 
 -- [[ Options ]]
 vim.o.hlsearch = false
@@ -36,14 +36,14 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
--- Treesitter folding 
+-- Treesitter folding
 -- vim.wo.foldmethod = 'expr'
 -- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
-vim.o.conceallevel= 2
+vim.o.conceallevel = 2
 vim.g.vim_markdown_override_foldtext = 0
 vim.g.vim_markdown_toc_autofit = 1
 vim.g.vim_markdown_math = 1
