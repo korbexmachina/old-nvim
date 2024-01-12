@@ -54,7 +54,6 @@ return {
     lsp.ensure_installed({
       'gopls',
       'rust_analyzer',
-      'clangd',
       'lua_ls',
     })
 
