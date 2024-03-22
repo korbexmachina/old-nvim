@@ -8,7 +8,7 @@ return {
     },
     opts = {
       backend = "ollama",
-      model = "mixtral:instruct",
+      model = "dolphin-mixtral:latest",
     },
   },
 }

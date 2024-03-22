@@ -1,5 +1,5 @@
 return {
-      {
+  {
     -- catppuccin theme
     'catppuccin/nvim',
     name = 'catppuccin',
@@ -14,6 +14,9 @@ return {
           which_key = true,
           markdown = true,
           alpha = true,
+        },
+        styles = {                 -- Handles the styles of general hi groups (see `:h highlight-args`):
+          comments = { "italic" }, -- Change the style of comments
         },
       })
       vim.cmd.colorscheme 'catppuccin'

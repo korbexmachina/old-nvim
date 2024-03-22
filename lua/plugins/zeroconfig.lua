@@ -128,6 +128,7 @@ return {
 		config = function()
 			vim.notify = require("notify").setup {
 				background_colour = "#0e0e0e",
+				top_down = false,
 			}
 		end
 	},
@@ -148,54 +149,70 @@ return {
 	},
 
 	-- Tabular
-	{
-		'godlygeek/tabular',
-		lazy = true,
-		ft = { 'md', 'markdown' }
-	},
+	-- {
+	-- 	'godlygeek/tabular',
+	-- 	lazy = true,
+	-- 	ft = { 'md', 'markdown' }
+	-- },
 
 	-- Markdown
-	{
-		'preservim/vim-markdown',
-		lazy = true,
-		ft = { 'md', 'markdown' },
-	},
-
-	-- Obsidian
-	{
-		"epwalsh/obsidian.nvim",
-		version = "*", -- recommended, use latest release instead of latest commit
-		lazy = true,
-		ft = "markdown",
-		dependencies = {
-			-- Required.
-			"nvim-lua/plenary.nvim",
-			-- Optional
-			'hrsh7th/nvim-cmp',
-			'nvim-telescope/telescope.nvim',
-		},
-		opts = {
-			workspaces = {
-				{
-					name = "notes",
-					path = "~/notes",
-				},
-			},
-
-		},
-
-		vim.keymap.set('n', '<leader>oo', vim.cmd.ObsidianOpen, { desc = '[O]pen [O]bsidian' }),
-		vim.keymap.set('n', '<leader>of', vim.cmd.ObsidianQuickSwitch, { desc = '[O]bsidian [F]ind' }),
-		vim.keymap.set('n', '<leader>od', vim.cmd.ObsidianFollowLink, { desc = '[O]bsidian [D]eep link' })
-	},
+	-- {
+	-- 	'preservim/vim-markdown',
+	-- 	lazy = true,
+	-- 	ft = { 'md', 'markdown' },
+	-- },
 
 	-- File manager integration
 	{
 		'is0n/fm-nvim',
 
 		-- File manager keybinds
-		vim.keymap.set('n', '<leader>x', ':Xplr<CR>'),
-		vim.keymap.set('n', '<leader>w', ':TaskWarriorTUI<CR>'),
-		vim.keymap.set('n', '<leader>lg', ':Lazygit<CR>')
+		vim.keymap.set('n', '<leader>x', ':Xplr<CR>', { desc = '[X]plr' }),
+		vim.keymap.set('n', '<leader>tw', ':TaskWarriorTUI<CR>', { desc = '[T]ask [W]arrior' }),
+		vim.keymap.set('n', '<leader>lg', ':Lazygit<CR>', { desc = '[L]azy[G]it' }),
+	},
+
+	-- GitHub Copilot
+	{
+		"github/copilot.vim",
+		lazy = false,
+		config = function()
+			vim.keymap.set('i', '<C-J>', 'copilot#Accept("<CR>")', {
+				expr = true,
+				replace_keycodes = false
+			})
+			vim.g.copilot_no_tab_map = true
+		end
+	},
+
+	-- Neoformat
+	{
+		'sbdchd/neoformat',
+
+		-- Run neoformat on web files
+		prettier = {
+			config = function()
+				return {
+					exe = "prettier",
+					args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
+					stdin = true,
+				}
+			end,
+		}
+	},
+
+	-- Pencil
+	{
+		'preservim/vim-pencil',
+	},
+
+	-- Gleam
+	{
+		'gleam-lang/gleam.vim',
+	},
+
+	-- AsciiDoc
+	{
+		'habamax/vim-asciidoctor',
 	}
 }

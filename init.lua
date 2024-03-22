@@ -23,6 +23,10 @@ require('lazy').setup({
 	},
 	{})
 
+-- Awesome Remaps
+vim.api.nvim_set_keymap("n", "<C-U>", "<C-U>zz<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<C-D>", "<C-D>zz<CR>", { noremap = true, silent = true })
+
 -- [[ Options ]]
 vim.opt.guifont = 'FiraCode Nerd Font Mono:h12'
 vim.o.hlsearch = false
@@ -37,6 +41,7 @@ vim.o.timeout = true
 vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
+
 -- Treesitter folding
 -- vim.wo.foldmethod = 'expr'
 -- vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
@@ -44,13 +49,13 @@ vim.cmd([[
 set signcolumn=yes
 autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 ]])
-vim.o.conceallevel = 2
-vim.g.vim_markdown_override_foldtext = 0
-vim.g.vim_markdown_toc_autofit = 1
-vim.g.vim_markdown_math = 1
-vim.g.vim_markdown_frontmatter = 1
-vim.g.vim_markdown_strikethrough = 1
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+vim.opt.conceallevel = 2
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function()
+		vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+	end,
+})
 
 -- Telescope
 local builtin = require('telescope.builtin')
@@ -68,3 +73,36 @@ vim.keymap.set('n', '<leader>/', function()
 		previewer = false,
 	})
 end, { desc = '[/] Fuzzily search in current buffer' })
+
+-- Colors
+
+local colors = require("catppuccin.palettes").get_palette()
+local TelescopeColor = {
+	TelescopeMatching = { fg = colors.flamingo, bg = 'none' },
+	TelescopeSelection = { fg = colors.mauve, bg = 'none', bold = true },
+	TelescopeNormal = { bg = 'none', fg = 'none' },
+
+	TelescopePromptPrefix = { bg = 'none' },
+	TelescopePromptNormal = { bg = 'none' },
+	TelescopeResultsNormal = { bg = 'none' },
+	TelescopePreviewNormal = { bg = 'none' },
+	TelescopePromptBorder = { bg = 'none', fg = colors.pink },
+	TelescopeResultsBorder = { bg = 'none', fg = colors.lavender },
+	TelescopePreviewBorder = { bg = 'none', fg = colors.blue },
+	TelescopePromptTitle = { bg = 'none', fg = 'none', italic = true },
+	TelescopeResultsTitle = { fg = 'none', italic = true },
+	TelescopePreviewTitle = { bg = 'none', fg = 'none', italic = true },
+}
+
+for hl, col in pairs(TelescopeColor) do
+	vim.api.nvim_set_hl(0, hl, col)
+end
+
+-- Zen
+vim.keymap.set("n", "<leader>z", vim.cmd.ZenMode, { desc = '[Z]en Mode' })
+
+-- Pencil
+vim.keymap.set("n", "<leader>p", vim.cmd.Pencil, { desc = '[P]encil' })
+vim.g.Pencil = {
+	conceallevel = 1,
+}
